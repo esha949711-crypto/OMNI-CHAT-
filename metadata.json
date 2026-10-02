@@ -1,0 +1,9 @@
+{
+  "name": "OmniChat - Next-Gen AI Assistant",
+  "description": "An intelligent, high-performance conversational AI workspace blending the best of Gemini and ChatGPT with reasoning, multimodal inputs, web search grounding, and smart chat management.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
+
