@@ -1,0 +1,54 @@
+```yaml
+name: OMNI-CHAT CI/CD
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  test:
+    name: Test OMNI-CHAT
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: "pip"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          if [ -f requirements.txt ]; then
+            pip install -r requirements.txt
+          fi
+
+      - name: Check Python files
+        run: |
+          python -m compileall .
+
+      - name: Check application
+        run: |
+          if [ -f app.py ]; then
+            python -m py_compile app.py
+          elif [ -f main.py ]; then
+            python -m py_compile main.py
+          else
+            echo "No app.py or main.py found."
+          fi
+
+      - name: Deployment ready
+        run: |
+          echo "======================================"
+          echo "OMNI-CHAT CI/CD CHECK PASSED"
+          echo "======================================"
+```
